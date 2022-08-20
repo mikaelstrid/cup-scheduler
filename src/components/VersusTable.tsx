@@ -16,31 +16,34 @@ function VersusTable() {
   }
 
   return (
-    <table className="table table-bordered">
-      <thead>
-        <tr>
-          <th></th>
-          {teams.map((x) => (
-            <th key={x.shortName}>{x.shortName}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {teams.map((teamX) => (
-          <tr key={teamX.shortName}>
-            <th>{teamX.shortName}</th>
-            {teams.map((teamY) => (
-              <td
-                key={`${teamX.shortName}-${teamY.shortName}`}
-                style={{
-                  backgroundColor: getBackgroundColor(teamX, teamY),
-                }}
-              ></td>
+    <>
+      <h2>Motståndare</h2>
+      <table className="table table-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            {teams.map((x) => (
+              <th key={x.shortName}>{x.shortName}</th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {teams.map((teamX) => (
+            <tr key={teamX.shortName}>
+              <th>{teamX.shortName}</th>
+              {teams.map((teamY) => (
+                <td
+                  key={`${teamX.shortName}-${teamY.shortName}`}
+                  style={{
+                    backgroundColor: getBackgroundColor(teamX, teamY),
+                  }}
+                ></td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 }
 

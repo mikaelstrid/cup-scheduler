@@ -29,6 +29,12 @@ export class DataService {
           field2: { id: 2, team1: 3, team2: 14 },
           field3: undefined,
         },
+        {
+          id: 2,
+          field1: undefined,
+          field2: undefined,
+          field3: { id: 6, team1: 5, team2: 6 },
+        },
       ],
     };
   }
