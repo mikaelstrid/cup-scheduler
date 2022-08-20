@@ -6,15 +6,15 @@ export interface ITeam {
 
 export interface IGame {
   id: number;
-  team1: number;
-  team2: number;
+  team1: number | undefined;
+  team2: number | undefined;
 }
 
 export interface IRound {
   id: number;
-  field1: IGame | undefined;
-  field2: IGame | undefined;
-  field3: IGame | undefined;
+  game1: IGame;
+  game2: IGame;
+  game3: IGame;
 }
 
 export interface ISchedule {

@@ -1,10 +1,12 @@
 import React from "react";
+import { ISchedule } from "../models/all.model";
 import { DataService } from "../services/data.service";
 import Game from "./Game";
 
-function Schedule() {
+function Schedule({ schedule }: { schedule: ISchedule | undefined }) {
   const teams = DataService.getTeams();
-  const schedule = DataService.getSchedule();
+
+  if (!schedule) return <p>Laddar...</p>;
 
   return (
     <>
@@ -20,16 +22,16 @@ function Schedule() {
         </thead>
         <tbody>
           {schedule.rounds.map((round) => (
-            <tr>
+            <tr key={round.id}>
               <th>Runda {round.id}</th>
               <td>
-                <Game game={round.field1} teams={teams}></Game>
+                <Game game={round.game1} teams={teams}></Game>
               </td>
               <td>
-                <Game game={round.field2} teams={teams}></Game>
+                <Game game={round.game2} teams={teams}></Game>
               </td>
               <td>
-                <Game game={round.field3} teams={teams}></Game>
+                <Game game={round.game3} teams={teams}></Game>
               </td>
             </tr>
           ))}

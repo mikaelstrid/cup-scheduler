@@ -1,11 +1,10 @@
 import React from "react";
 import { ScheduleHelper } from "../helpers/schedule.helper";
-import { ITeam } from "../models/all.model";
+import { ISchedule, ITeam } from "../models/all.model";
 import { DataService } from "../services/data.service";
 
-function VersusTable() {
+function VersusTable({ schedule }: { schedule: ISchedule | undefined }) {
   const teams = DataService.getTeams();
-  const schedule = DataService.getSchedule();
 
   function getBackgroundColor(teamX: ITeam, teamY: ITeam): string {
     if (
@@ -14,6 +13,8 @@ function VersusTable() {
       return "green";
     return "";
   }
+
+  if (!schedule) return <p>Laddar...</p>;
 
   return (
     <>

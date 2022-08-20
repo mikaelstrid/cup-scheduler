@@ -1,12 +1,19 @@
 import React from "react";
 import { ScheduleHelper } from "../helpers/schedule.helper";
 import { TeamHelper } from "../helpers/team.helper";
-import { ITeam } from "../models/all.model";
+import { ISchedule, ITeam } from "../models/all.model";
 import { DataService } from "../services/data.service";
 
-function TeamSchedule({ team }: { team: ITeam }) {
+function TeamSchedule({
+  team,
+  schedule,
+}: {
+  team: ITeam;
+  schedule: ISchedule | undefined;
+}) {
   const teams = DataService.getTeams();
-  const schedule = DataService.getSchedule();
+
+  if (!schedule) return <p>Laddar...</p>;
 
   return (
     <>
@@ -14,10 +21,10 @@ function TeamSchedule({ team }: { team: ITeam }) {
         {team.name} ({ScheduleHelper.getGames(team.id, schedule).length})
       </h3>
       {schedule.rounds.map((round) =>
-        [round.field1, round.field2, round.field3]
+        [round.game1, round.game2, round.game3]
           .filter((game) => game?.team1 === team.id || game?.team2 === team.id)
           .map((game) => (
-            <div>
+            <div key={round.id}>
               Runda {round.id}: {TeamHelper.getTeamName(game?.team1, teams)} vs{" "}
               {TeamHelper.getTeamName(game?.team2, teams)}
             </div>

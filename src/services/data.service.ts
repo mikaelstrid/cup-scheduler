@@ -1,6 +1,8 @@
-import { ISchedule, ITeam } from "../models/all.model";
+import { IGame, IRound, ISchedule, ITeam } from "../models/all.model";
 
 export class DataService {
+  private static callbackFn: () => void;
+
   public static getTeams(): ITeam[] {
     return [
       { id: 1, name: "Kållered 1", shortName: "KSK 1" },
@@ -20,22 +22,59 @@ export class DataService {
     ];
   }
 
-  public static getSchedule(): ISchedule {
-    return {
-      rounds: [
-        {
-          id: 1,
-          field1: { id: 1, team1: 1, team2: 14 },
-          field2: { id: 2, team1: 3, team2: 14 },
-          field3: undefined,
-        },
-        {
-          id: 2,
-          field1: undefined,
-          field2: undefined,
-          field3: { id: 6, team1: 5, team2: 6 },
-        },
-      ],
-    };
+  public static registerUpdateCallback(callbackFn: () => void): void {
+    DataService.callbackFn = callbackFn;
+  }
+
+  public static updateGame(game: IGame): void {
+    const schedule = DataService.loadSchedule();
+    for (let i = 0; i < schedule.rounds.length; i++) {
+      const round = schedule.rounds[i];
+      if (round.game1.id === game.id) {
+        round.game1 = game;
+        break;
+      }
+      if (round.game2.id === game.id) {
+        round.game2 = game;
+        break;
+      }
+      if (round.game3.id === game.id) {
+        round.game3 = game;
+        break;
+      }
+    }
+    DataService.saveSchedule(schedule);
+    if (DataService.callbackFn) DataService.callbackFn();
+  }
+
+  public static loadSchedule(): ISchedule {
+    try {
+      const temp = localStorage.getItem("kit.schedule");
+      if (!temp) {
+        console.log("No data found");
+        return this.createEmptySchedule();
+      }
+      return JSON.parse(temp);
+    } catch {
+      console.log("Could not load schedule");
+      return this.createEmptySchedule();
+    }
+  }
+
+  public static saveSchedule(schedule: ISchedule): void {
+    localStorage.setItem("kit.schedule", JSON.stringify(schedule));
+  }
+
+  private static createEmptySchedule(): ISchedule {
+    const temp: IRound[] = [];
+    for (let i = 1; i <= 9; i++) {
+      temp.push({
+        id: i,
+        game1: { id: (i - 1) * 3 + 1, team1: undefined, team2: undefined },
+        game2: { id: (i - 1) * 3 + 2, team1: undefined, team2: undefined },
+        game3: { id: (i - 1) * 3 + 3, team1: undefined, team2: undefined },
+      });
+    }
+    return { rounds: temp };
   }
 }
