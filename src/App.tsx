@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import TeamSchedule from "./components/TeamSchedule";
+import VersusTable from "./components/VersusTable";
+import { DataService } from "./services/data.service";
 
 function App() {
+  const teams = DataService.getTeams();
+  // const schedule = DataService.getSchedule();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+        <VersusTable></VersusTable>
+
+        {teams.map((team) => (
+          <TeamSchedule team={team}></TeamSchedule>
+        ))}
+      </div>
     </div>
   );
 }
