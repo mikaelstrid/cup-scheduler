@@ -25,13 +25,25 @@ function Schedule({ schedule }: { schedule: ISchedule | undefined }) {
             <tr key={round.id}>
               <th>Runda {round.id}</th>
               <td>
-                <Game game={round.game1} teams={teams}></Game>
+                <Game
+                  game={round.game1}
+                  teams={teams}
+                  schedule={schedule}
+                ></Game>
               </td>
               <td>
-                <Game game={round.game2} teams={teams}></Game>
+                <Game
+                  game={round.game2}
+                  teams={teams}
+                  schedule={schedule}
+                ></Game>
               </td>
               <td>
-                <Game game={round.game3} teams={teams}></Game>
+                <Game
+                  game={round.game3}
+                  teams={teams}
+                  schedule={schedule}
+                ></Game>
               </td>
             </tr>
           ))}

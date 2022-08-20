@@ -70,9 +70,24 @@ export class DataService {
     for (let i = 1; i <= 9; i++) {
       temp.push({
         id: i,
-        game1: { id: (i - 1) * 3 + 1, team1: undefined, team2: undefined },
-        game2: { id: (i - 1) * 3 + 2, team1: undefined, team2: undefined },
-        game3: { id: (i - 1) * 3 + 3, team1: undefined, team2: undefined },
+        game1: {
+          id: (i - 1) * 3 + 1,
+          roundId: i,
+          team1: undefined,
+          team2: undefined,
+        },
+        game2: {
+          id: (i - 1) * 3 + 2,
+          roundId: i,
+          team1: undefined,
+          team2: undefined,
+        },
+        game3: {
+          id: (i - 1) * 3 + 3,
+          roundId: i,
+          team1: undefined,
+          team2: undefined,
+        },
       });
     }
     return { rounds: temp };

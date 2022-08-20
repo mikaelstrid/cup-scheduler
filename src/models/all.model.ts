@@ -6,6 +6,7 @@ export interface ITeam {
 
 export interface IGame {
   id: number;
+  roundId: number;
   team1: number | undefined;
   team2: number | undefined;
 }
