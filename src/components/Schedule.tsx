@@ -15,6 +15,7 @@ function Schedule({ schedule }: { schedule: ISchedule | undefined }) {
       <h2>Spelschema</h2>
       <div className="mb-3">
         <Team
+          selectedValue={highlightedTeam}
           teams={teams}
           handleSelectedTeamChanged={(e) => setHighlightedTeam(e)}
         ></Team>
@@ -78,20 +79,19 @@ function Schedule({ schedule }: { schedule: ISchedule | undefined }) {
   );
 
   function Team({
+    selectedValue,
     teams,
     handleSelectedTeamChanged,
   }: {
+    selectedValue: number;
     teams: ITeam[];
     handleSelectedTeamChanged: (value: number) => void;
   }) {
-    const [selectedValue, setSelectedValue] = useState<number>(-1);
     return (
       <select
         className="form-select"
         onChange={(e) => {
-          const temp = parseInt(e.target.value);
-          setSelectedValue(temp);
-          handleSelectedTeamChanged(temp);
+          handleSelectedTeamChanged(parseInt(e.target.value));
         }}
         value={selectedValue.toString()}
       >
