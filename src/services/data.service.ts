@@ -67,9 +67,13 @@ export class DataService {
 
   private static createEmptySchedule(): ISchedule {
     const temp: IRound[] = [];
-    for (let i = 1; i <= 9; i++) {
+    const templates = this.createRoundTemplates();
+    for (let i = 1; i <= templates.length; i++) {
+      const template = templates[i - 1];
       temp.push({
         id: i,
+        startTime: template.startTime,
+        endTime: template.endTime,
         game1: {
           id: (i - 1) * 3 + 1,
           roundId: i,
@@ -91,5 +95,33 @@ export class DataService {
       });
     }
     return { rounds: temp };
+  }
+
+  private static createRoundTemplates(): {
+    id: number;
+    startTime: string;
+    endTime: string;
+  }[] {
+    return [
+      { id: 1, startTime: "08:00", endTime: "08:30" },
+      { id: 2, startTime: "08:30", endTime: "09:00" },
+      { id: 3, startTime: "09:00", endTime: "09:30" },
+      { id: 4, startTime: "09:30", endTime: "10:00" },
+      { id: 5, startTime: "10:15", endTime: "10:45" },
+      { id: 6, startTime: "10:45", endTime: "11:15" },
+      { id: 7, startTime: "11:15", endTime: "11:45" },
+      { id: 8, startTime: "12:30", endTime: "13:00" },
+      { id: 9, startTime: "13:00", endTime: "13:30" },
+      { id: 10, startTime: "13:30", endTime: "14:00" },
+      { id: 11, startTime: "14:15", endTime: "14:45" },
+      { id: 12, startTime: "14:45", endTime: "15:15" },
+      { id: 13, startTime: "15:15", endTime: "15:45" },
+      { id: 14, startTime: "16:00", endTime: "16:30" },
+      { id: 15, startTime: "16:30", endTime: "17:00" },
+      { id: 16, startTime: "17:00", endTime: "17:30" },
+      { id: 17, startTime: "17:45", endTime: "18:15" },
+      { id: 18, startTime: "18:15", endTime: "18:45" },
+      { id: 19, startTime: "18:45", endTime: "19:15" },
+    ];
   }
 }

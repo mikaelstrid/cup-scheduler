@@ -46,14 +46,14 @@ function Game({
   );
 
   return (
-    <div className="d-flex flex-row flex-wrap">
+    <div className="d-flex flex-nowrap align-items-center">
       <Team
         selectedTeam={game.team1}
         teams={teams}
         eligibleTeams={eligibleTeamsSlot1}
         handleSelectedTeamChanged={(e) => handleTeamChanged(1, e)}
       ></Team>{" "}
-      <span>vs</span>{" "}
+      <span className="mx-1">vs</span>{" "}
       <Team
         selectedTeam={game.team2}
         teams={teams}

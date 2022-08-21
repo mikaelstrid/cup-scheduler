@@ -13,6 +13,8 @@ export interface IGame {
 
 export interface IRound {
   id: number;
+  startTime: string;
+  endTime: string;
   game1: IGame;
   game2: IGame;
   game3: IGame;

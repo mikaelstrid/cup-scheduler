@@ -60,7 +60,21 @@ export class ScheduleHelper {
       .flat();
     result = result.filter((team) => teamsInRound.indexOf(team.id) === -1);
 
+    // Remove teams that already played 8 games
+    result = result.filter(
+      (team) => this.getGames(team.id, schedule).length < 8
+    );
+
     return result.map((team) => team.id);
+  }
+
+  public static teamPlaysInRound(teamId: number, round: IRound): boolean {
+    return (
+      this.getGamesInRound(round)
+        .map((game) => this.getTeamsInGame(game))
+        .flat()
+        .indexOf(teamId) !== -1
+    );
   }
 
   private static getGamesInRound(round: IRound): IGame[] {
