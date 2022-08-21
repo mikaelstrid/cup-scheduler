@@ -7,7 +7,7 @@ export class DataService {
     return [
       { id: 1, name: "Kållered 1", shortName: "KSK 1" },
       { id: 2, name: "Kållered 2", shortName: "KSK 2" },
-      { id: 3, name: "Kållered 2", shortName: "KSK 3" },
+      { id: 3, name: "Kållered 3", shortName: "KSK 3" },
       { id: 4, name: "Borås 1", shortName: "BOR 1" },
       { id: 5, name: "Borås 2", shortName: "BOR 2" },
       { id: 6, name: "Frölunda", shortName: "FRÖ" },

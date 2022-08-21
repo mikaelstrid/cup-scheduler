@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ScheduleHelper } from "../helpers/schedule.helper";
-import { ISchedule, ITeam } from "../models/all.model";
+import { IGame, ISchedule, ITeam } from "../models/all.model";
 import { DataService } from "../services/data.service";
 import Game from "./Game";
 
@@ -9,6 +9,12 @@ function Schedule({ schedule }: { schedule: ISchedule | undefined }) {
   const [highlightedTeam, setHighlightedTeam] = useState<number>(-1);
 
   if (!schedule) return <p>Laddar...</p>;
+
+  function getBackgroundColor(game: IGame): string {
+    if (game.team1 !== undefined && game.team2 !== undefined)
+      return "lightgreen";
+    return "";
+  }
 
   return (
     <>
@@ -40,7 +46,7 @@ function Schedule({ schedule }: { schedule: ISchedule | undefined }) {
                   highlightedTeam,
                   round
                 )
-                  ? "blueviolet"
+                  ? "lightblue"
                   : "",
               }}
             >
@@ -50,21 +56,21 @@ function Schedule({ schedule }: { schedule: ISchedule | undefined }) {
                   {round.startTime}-{round.endTime}
                 </span>
               </th>
-              <td>
+              <td style={{ backgroundColor: getBackgroundColor(round.game1) }}>
                 <Game
                   game={round.game1}
                   teams={teams}
                   schedule={schedule}
                 ></Game>
               </td>
-              <td>
+              <td style={{ backgroundColor: getBackgroundColor(round.game2) }}>
                 <Game
                   game={round.game2}
                   teams={teams}
                   schedule={schedule}
                 ></Game>
               </td>
-              <td>
+              <td style={{ backgroundColor: getBackgroundColor(round.game3) }}>
                 <Game
                   game={round.game3}
                   teams={teams}

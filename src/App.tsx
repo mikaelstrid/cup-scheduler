@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import GamesPlayed from "./components/GamesPlayed";
 import Schedule from "./components/Schedule";
 import TeamSchedule from "./components/TeamSchedule";
 import VersusTable from "./components/VersusTable";
@@ -23,6 +24,8 @@ function App() {
       <div className="container">
         <h1>Isbjörnscupen</h1>
         <Schedule schedule={schedule}></Schedule>
+
+        <GamesPlayed schedule={schedule}></GamesPlayed>
 
         <VersusTable schedule={schedule}></VersusTable>
 
