@@ -11,6 +11,9 @@ function VersusTable({ schedule }: { schedule: ISchedule | undefined }) {
       ScheduleHelper.getOpponents(teamX.id, schedule).indexOf(teamY.id) !== -1
     )
       return "green";
+    if (teamX.shortName.substring(0, 3) === teamY.shortName.substring(0, 3)) {
+      return "gray";
+    }
     return "";
   }
 
