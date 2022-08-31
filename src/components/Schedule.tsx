@@ -5,12 +5,14 @@ import { DataService } from "../services/data.service";
 import Game from "./Game";
 
 function Schedule({ schedule }: { schedule: ISchedule | undefined }) {
+  const editMode = false;
   const teams = DataService.getTeams();
   const [highlightedTeam, setHighlightedTeam] = useState<number>(-1);
 
   if (!schedule) return <p>Laddar...</p>;
 
   function getBackgroundColor(game: IGame): string {
+    if (!editMode) return "";
     if (game.team1 !== undefined && game.team2 !== undefined)
       return "lightgreen";
     return "";
@@ -58,6 +60,7 @@ function Schedule({ schedule }: { schedule: ISchedule | undefined }) {
               </th>
               <td style={{ backgroundColor: getBackgroundColor(round.game1) }}>
                 <Game
+                  editMode={editMode}
                   game={round.game1}
                   teams={teams}
                   schedule={schedule}
@@ -65,6 +68,7 @@ function Schedule({ schedule }: { schedule: ISchedule | undefined }) {
               </td>
               <td style={{ backgroundColor: getBackgroundColor(round.game2) }}>
                 <Game
+                  editMode={editMode}
                   game={round.game2}
                   teams={teams}
                   schedule={schedule}
@@ -72,6 +76,7 @@ function Schedule({ schedule }: { schedule: ISchedule | undefined }) {
               </td>
               <td style={{ backgroundColor: getBackgroundColor(round.game3) }}>
                 <Game
+                  editMode={editMode}
                   game={round.game3}
                   teams={teams}
                   schedule={schedule}

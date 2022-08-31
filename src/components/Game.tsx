@@ -2,16 +2,27 @@ import React from "react";
 import { ScheduleHelper } from "../helpers/schedule.helper";
 import { IGame, ISchedule, ITeam } from "../models/all.model";
 import { DataService } from "../services/data.service";
+import { TeamHelper } from "../helpers/team.helper";
 
 function Game({
+  editMode,
   game,
   teams,
   schedule,
 }: {
+  editMode: boolean;
   game: IGame;
   teams: ITeam[];
   schedule: ISchedule;
 }) {
+  if (!editMode)
+    return (
+      <span>
+        {TeamHelper.getTeamName(game.team1, teams)} vs{" "}
+        {TeamHelper.getTeamName(game.team2, teams)}
+      </span>
+    );
+
   function handleTeamChanged(teamNumber: number, newTeamId: number): void {
     const updatedGame = {
       id: game.id,
